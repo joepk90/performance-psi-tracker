@@ -5,12 +5,11 @@ const ALERTS = 'Alerts';
 /**
  * send alart
  */
-function sendEmailAlert(user) {
+function sendEmailAlert(user, message) {
 
-  if (!user.email) return;
+  if (!user.email || !message) return;
 
-  var message = 'This is your Alert email!'; // Second column
-  var subject = 'Your Google Spreadsheet Alert';
+  var subject = 'PSI Performance Tracker: Some of your PSI budgets have been exceeded!'; // make configurable option?
   MailApp.sendEmail(user.email, subject, message);
 }
 
@@ -44,15 +43,44 @@ const getUsers = () => {
 
 }
 
+const generateAlertMessage = (exceededBudgetReports) => {
+
+  if (exceededBudgetReports.length === 0) return;
+
+  let message = `The following budgets have been exceeded:`;
+
+  exceededBudgetReports.forEach(exceededBudgetReport => {
+
+    message += `
+
+    Label: ${exceededBudgetReport.label}
+    URL: ${exceededBudgetReport.url}
+    `;
+
+    exceededBudgetReport.budgets.forEach((budget) => {
+
+      message += `
+      - Budget: ${budget.budgetLabel}: ${budget.budgetDiff}
+      `;
+    })
+  })
+
+  return message
+
+}
+
 const alertUsers = () => {
 
-  // const exceededBudgets = getBudgetAlerts();
-  // if (isEmpty(exceededBudgets)) return;
+  const exceededBudgets = checkBudgets();
+
+  if (exceededBudgets.length === 0) return;
 
   const users = getUsers();
 
+  const message = generateAlertMessage(exceededBudgets);
+
   users.map(user => {
-    sendEmailAlert(user)
+    sendEmailAlert(user, message)
   })
   
 }
