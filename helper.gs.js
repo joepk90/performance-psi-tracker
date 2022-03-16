@@ -320,7 +320,7 @@ function parseResults(content, budgets) {
 
   const assets = [
     ...getAssetArray(assetsObject["total"], budgets.LHTotalBudget),
-    ...getAssetArray(assetsObject["script"], budgets.LSScriptBudget),
+    ...getAssetArray(assetsObject["script"], budgets.LHScriptBudget),
     ...getAssetArray(assetsObject["image"], budgets.LHImageBudget),
     ...getAssetArray(assetsObject["stylesheet"], budgets.LHStylesheetBudget),
     ...getAssetArray(assetsObject["document"], budgets.LHDocumentBudget),
