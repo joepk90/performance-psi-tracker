@@ -3,6 +3,9 @@ Performance Tracker using PSI API and App Script to collect reports, set budgets
 
 Based off of: https://github.com/danieltxok/performance-psi
 
+Example Dashboard: https://datastudio.google.com/reporting/d59bddbd-9c2e-4bdf-a562-527b7161db0a
+Example Spreadsheet: https://docs.google.com/spreadsheets/d/1kGcEWwY4Ovtk92cYEz1_K8ELZ46TtO_kpo7sNbEQnE4/edit?usp=sharing
+
 ### Main Functions (for testing):
 
 | File | Function |
